@@ -32,13 +32,13 @@ win32-msvc* {
                       $${OPENRPT_BLD}/librenderer.so \
                       $${OPENRPT_BLD}/libwrtembed.so \
                       $${OPENRPT_BLD}/libdmtx.so \
-                      $${OPENRPT_BLD}/libcommon.so
+                      $${OPENRPT_BLD}/libopenrptcommon.so
   } else {
     PRE_TARGETDEPS += $${OPENRPT_BLD}/lib/libMetaSQL.a  \
                       $${OPENRPT_BLD}/lib/librenderer.a \
                       $${OPENRPT_BLD}/lib/libwrtembed.a \
                       $${OPENRPT_BLD}/lib/libDmtx_Library.a \
-                      $${OPENRPT_BLD}/lib/libcommon.a
+                      $${OPENRPT_BLD}/lib/libopenrptcommon.a
   }
 }
 
