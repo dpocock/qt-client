@@ -1,0 +1,13 @@
+diff --git a/guiclient/main.cpp b/guiclient/main.cpp
+index bbb24d8..2ffb68c 100644
+--- a/guiclient/main.cpp
++++ b/guiclient/main.cpp
+@@ -302,7 +302,7 @@ int main(int argc, char *argv[])
+                " WHERE pkghead_name IN ('xtmfg');" )
+           << editionDesc( "Distribution",       ":/images/splashDistEdition.png",        true,
+                "SELECT fetchMetricText('Application') = 'Standard';" )
+-          << editionDesc( "PostBooks",      ":/images/splashPostBooks.png",        true,
++          << editionDesc( "PostBooks",      ":/images/splashPostBooks.png",        false,
+                "SELECT fetchMetricText('Application') = 'PostBooks';" )
+   ;
+ 
