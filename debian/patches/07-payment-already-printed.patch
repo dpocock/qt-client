@@ -1,0 +1,121 @@
+diff --git a/guiclient/printCheck.cpp b/guiclient/printCheck.cpp
+index c92890a..c49d09e 100644
+--- a/guiclient/printCheck.cpp
++++ b/guiclient/printCheck.cpp
+@@ -38,6 +38,7 @@ printCheck::printCheck(QWidget* parent, const char* name, Qt::WFlags fl)
+   connect(_check,     SIGNAL(newID(int)), this, SLOT(sEnableCreateEFT()));
+   connect(_createEFT, SIGNAL(clicked()),  this, SLOT(sCreateEFT()));
+   connect(_print,     SIGNAL(clicked()),  this, SLOT(sPrint()));
++  connect(_printed,   SIGNAL(clicked()),  this, SLOT(sPrintedAlready()));
+ 
+   _captive = FALSE;
+   _setCheckNumber = -1;
+@@ -81,6 +82,16 @@ enum SetResponse printCheck::set(const ParameterList &pParams)
+ 
+ void printCheck::sPrint()
+ {
++  sPrintImpl(false);
++}
++
++void printCheck::sPrintedAlready()
++{
++  sPrintImpl(true);
++}
++
++void printCheck::sPrintImpl(bool printedAlready)
++{
+   XSqlQuery printPrint;
+   if(_setCheckNumber != -1 && _setCheckNumber != _nextCheckNum->text().toInt())
+   {
+@@ -107,6 +118,7 @@ void printCheck::sPrint()
+   }
+ 
+   if (_createEFT->isEnabled() &&
++      !printedAlready &&
+       QMessageBox::question(this, tr("Print Anyway?"),
+                             tr("<p>The recipient of this check has been "
+                                "configured for EFT transactions. Do you want "
+@@ -197,6 +209,12 @@ void printCheck::sPrint()
+       return;
+     }
+ 
++    if(printedAlready)
++    {
++      markCheckAsPrinted(_check->id());
++      return;
++    }
++
+     ParameterList params;
+ 
+     params.append("checkhead_id", _check->id());
+diff --git a/guiclient/printCheck.h b/guiclient/printCheck.h
+index d8b10f5..f5d1cc9 100644
+--- a/guiclient/printCheck.h
++++ b/guiclient/printCheck.h
+@@ -35,6 +35,7 @@ public slots:
+     virtual void sEnableCreateEFT();
+     virtual void sHandleBankAccount( int pBankaccntid );
+     virtual void sPrint();
++    virtual void sPrintedAlready();
+     virtual void populate( int pcheckid );
+ 
+ protected slots:
+@@ -48,6 +49,7 @@ private:
+     int  _setCheckNumber;
+ 
+     virtual void markCheckAsPrinted(const int);
++    virtual void sPrintImpl(bool printedAlready);
+ 
+ };
+ 
+diff --git a/guiclient/printCheck.ui b/guiclient/printCheck.ui
+index eb51b4b..2e75ab6 100644
+--- a/guiclient/printCheck.ui
++++ b/guiclient/printCheck.ui
+@@ -131,6 +131,16 @@ to be bound by its terms.</comment>
+       </widget>
+      </item>
+      <item>
++      <widget class="QPushButton" name="_printed">
++       <property name="enabled">
++        <bool>false</bool>
++       </property>
++       <property name="text">
++        <string>&amp;Already Printed/Paid</string>
++       </property>
++      </widget>
++     </item>
++     <item>
+       <widget class="QPushButton" name="_createEFT">
+        <property name="enabled">
+         <bool>false</bool>
+@@ -179,6 +189,7 @@ to be bound by its terms.</comment>
+   <tabstop>_check</tabstop>
+   <tabstop>_nextCheckNum</tabstop>
+   <tabstop>_print</tabstop>
++  <tabstop>_printed</tabstop>
+   <tabstop>_close</tabstop>
+  </tabstops>
+  <resources/>
+@@ -215,5 +226,21 @@ to be bound by its terms.</comment>
+     </hint>
+    </hints>
+   </connection>
++  <connection>
++   <sender>_check</sender>
++   <signal>notNull(bool)</signal>
++   <receiver>_printed</receiver>
++   <slot>setEnabled(bool)</slot>
++   <hints>
++    <hint type="sourcelabel">
++     <x>245</x>
++     <y>66</y>
++    </hint>
++    <hint type="destinationlabel">
++     <x>348</x>
++     <y>58</y>
++    </hint>
++   </hints>
++  </connection>
+  </connections>
+ </ui>
