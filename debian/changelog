@@ -1,20 +1,14 @@
-postbooks (4.9.1-1) experimental; urgency=medium
-
-  * Placeholder
-
- -- Gil Moskowitz <gmoskowitz@xtuple.com>  Wed, 15 Jul 2015 13:06:00 -0400
-
-postbooks (4.9.0-1) experimental; urgency=medium
+postbooks (4.9.1-1) unstable; urgency=medium
 
   * New upstream release.
 
- -- Gil Moskowitz <gmoskowitz@xtuple.com>  Wed, 15 Jul 2015 13:06:00 -0400
+ -- Daniel Pocock <daniel@pocock.pro>  Thu, 03 Sep 2015 14:49:36 +0200
 
-postbooks (4.8.1-1) experimental; urgency=medium
+postbooks (4.7.0-3) unstable; urgency=medium
 
-  * New upstream release.
+  * Remove build dependency on libqt4-webkit (Closes: #787747)
 
- -- Daniel Pocock <daniel@pocock.pro>  Sat, 28 Feb 2015 14:20:13 +0100
+ -- Daniel Pocock <daniel@pocock.pro>  Thu, 04 Jun 2015 19:45:22 +0200
 
 postbooks (4.7.0-2) unstable; urgency=medium
 
