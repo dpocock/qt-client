@@ -1,4 +1,4 @@
-postbooks (4.9.1-2) unstable; urgency=medium
+postbooks (4.9.1-2~bpo8+1) jessie-backports; urgency=medium
 
   * Add missing patches directory.
 
