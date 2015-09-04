@@ -1,2 +1,3 @@
 usr/lib/*/lib*.so.*
 guiclient/xTuple.xpm usr/share/pixmaps
+usr/share/icons/hicolor/128x128/apps/postbooks.png
