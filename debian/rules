@@ -40,6 +40,10 @@ override_dh_auto_configure:
 override_dh_auto_install:
 	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)
 	mv lib/lib*.so* debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)
+	mkdir -p debian/tmp/usr/share/icons/hicolor/128x128/apps
+	cp guiclient/images/icon128x32.png debian/tmp/usr/share/icons/hicolor/128x128/apps/postbooks.png
+	mkdir -p debian/tmp/usr/share/applications
+	sed -e 's!^Icon=.*$$!Icon=/usr/share/icons/hicolor/128x128/apps/postbooks.png!g' postbooks.desktop > debian/tmp/usr/share/applications/postbooks.desktop
 	dh_auto_install
 
 .PHONY: override_dh_auto_configure override_dh_clean override_dh_auto_test
