@@ -8,8 +8,8 @@ Uploaders:
 Build-Depends: debhelper (>= 9), dpkg-dev (>= 1.16.1~), libqt4-dev (>= 4.5.0), libdmtx-dev, libopenrpt-dev (>= 3.3.10), libcsvimp-dev (>= 0.5.1), libqtassistantclient-dev, libz-dev, libqtwebkit-dev, libsqlite3-dev
 Standards-Version: 3.9.6
 Homepage: http://www.xtuple.com/postbooks
-Vcs-Git: https://github.com/xtuple/qt-client
-Vcs-Browser: https://github.com/xtuple/qt-client
+Vcs-Git: git://anonscm.debian.org/collab-maint/postbooks.git
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/postbooks.git/
 
 Package: libxtuplecommon1
 Section: libs
